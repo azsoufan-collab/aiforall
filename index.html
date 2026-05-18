@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for All — Free AI Education for Everyone</title>
+<meta name="description" content="8 free courses teaching AI fundamentals, automation, prompting, agents and more. No jargon, no cost, no prerequisites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a8f68;
+    --green-light: #e6f5ef;
+    --green-mid: #a8ddc9;
+    --green-dark: #0d5c43;
+    --ink: #111210;
+    --ink-mid: #4a4f48;
+    --ink-light: #8a9088;
+    --surface: #f8f7f4;
+    --white: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --border-mid: rgba(0,0,0,0.14);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5vw;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+
+  .logo em { font-style: italic; color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border-mid);
+  }
+
+  .btn-outline:hover { background: var(--surface); }
+
+  .btn-lg { font-size: 16px; padding: 14px 28px; border-radius: var(--radius-sm); }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding: 6rem 5vw 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green-dark);
+    background: var(--green-light);
+    border: 1px solid var(--green-mid);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 460px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-proof {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+    font-size: 13px;
+    color: var(--ink-light);
+  }
+
+  .proof-avatars {
+    display: flex;
+  }
+
+  .proof-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    margin-left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .proof-avatar:first-child { margin-left: 0; }
+  .av1 { background: #1a8f68; }
+  .av2 { background: #3b82f6; }
+  .av3 { background: #f59e0b; }
+  .av4 { background: #ec4899; }
+
+  /* Hero card */
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .hero-card-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+
+  .course-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .preview-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    transition: border-color 0.15s;
+  }
+
+  .preview-item:hover { border-color: var(--green-mid); }
+
+  .preview-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .preview-free {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green-dark);
+    background: var(--green-light);
+    padding: 2px 8px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  .preview-locked {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink-light);
+    flex-shrink: 0;
+  }
+
+  .hero-card-cta {
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .hero-card-cta:hover { background: var(--green-dark); }
+
+  /* ---- STATS STRIP ---- */
+  .stats-strip {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 5vw;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--green);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--ink-mid);
+  }
+
+  /* ---- CATALOGUE ---- */
+  .catalogue {
+    padding: 5rem 5vw;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--ink-mid);
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+    line-height: 1.7;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 18px;
+    border-radius: 100px;
+    border: 1px solid var(--border-mid);
+    background: transparent;
+    color: var(--ink-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tab:hover { background: var(--surface); color: var(--ink); }
+
+  .tab.active {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
+
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .course-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .course-card:hover {
+    border-color: var(--green-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26,143,104,0.08);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .course-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .ic-teal { background: #e1f5ee; }
+  .ic-blue { background: #e6f1fb; }
+  .ic-amber { background: #fef3c7; }
+  .ic-purple { background: #ede9fe; }
+  .ic-coral { background: #fff1ee; }
+  .ic-green { background: #ecfdf5; }
+  .ic-pink { background: #fdf2f8; }
+  .ic-slate { background: #f1f5f9; }
+
+  .course-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-light);
+    letter-spacing: 0.5px;
+  }
+
+  .track-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .track-foundations { background: #e1f5ee; color: #0d5c43; }
+  .track-automation { background: #fef3c7; color: #78350f; }
+  .track-advanced { background: #ede9fe; color: #4c1d95; }
+
+  .course-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+    color: var(--ink);
+  }
+
+  .course-desc {
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--ink-light);
+    align-items: center;
+  }
+
+  .card-meta span { display: flex; align-items: center; gap: 4px; }
+
+  .free-tag {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green-dark);
+    background: var(--green-light);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  /* ---- HOW IT WORKS ---- */
+  .how {
+    background: var(--surface);
+    padding: 5rem 5vw;
+    border-top: 1px solid var(--border);
+  }
+
+  .how-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .step {
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--green-mid);
+  }
+
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--green-mid);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-title {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  /* ---- CTA ---- */
+  .cta-section {
+    padding: 6rem 5vw;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .cta-section h2 em { font-style: italic; color: var(--green); }
+
+  .cta-section p {
+    font-size: 16px;
+    color: var(--ink-mid);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .signup-form {
+    display: flex;
+    gap: 10px;
+    max-width: 420px;
+    margin: 0 auto 1rem;
+  }
+
+  .email-input {
+    flex: 1;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-family: 'Instrument Sans', sans-serif;
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .email-input:focus { border-color: var(--green); }
+
+  .form-note {
+    font-size: 12px;
+    color: var(--ink-light);
+    text-align: center;
+  }
+
+  .trust-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--ink-mid);
+  }
+
+  .trust-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--green-dark);
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 5vw;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  .footer-logo em { font-style: italic; color: var(--green); }
+
+  .footer-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.6s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-card { display: none; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .course-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .signup-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">AI <em>for All</em></a>
+    <ul class="nav-links">
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#signup">About</a></li>
+    </ul>
+    <a href="#signup" class="btn btn-primary">Sign up free →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 0 5vw;">
+  <div class="hero">
+    <div>
+      <div class="hero-badge fade-up">
+        <span class="dot"></span>
+        Free AI education — no cost, ever
+      </div>
+      <h1 class="fade-up delay-1">
+        AI isn't<br>complicated.<br><em>We'll show you.</em>
+      </h1>
+      <p class="hero-sub fade-up delay-2">
+        8 practical courses from zero to building real AI pipelines. No jargon, no prerequisites, no cost. For anyone who wants to actually understand AI.
+      </p>
+      <div class="hero-actions fade-up delay-3">
+        <a href="#signup" class="btn btn-primary btn-lg">Start learning free →</a>
+        <a href="#courses" class="btn btn-outline btn-lg">Browse courses</a>
+      </div>
+      <div class="hero-proof fade-up delay-3">
+        <div class="proof-avatars">
+          <div class="proof-avatar av1">A</div>
+          <div class="proof-avatar av2">M</div>
+          <div class="proof-avatar av3">R</div>
+          <div class="proof-avatar av4">S</div>
+        </div>
+        Join thousands learning AI for free
+      </div>
+    </div>
+    <div class="hero-card fade-up delay-2">
+      <div class="hero-card-label">Your learning path</div>
+      <div class="course-preview">
+        <div class="preview-item">
+          <div class="preview-icon ic-teal">🧠</div>
+          What is AI?
+          <span class="preview-free">Free</span>
+        </div>
+        <div class="preview-item">
+          <div class="preview-icon ic-blue">💬</div>
+          LLMs & tokens
+          <span class="preview-free">Free</span>
+        </div>
+        <div class="preview-item">
+          <div class="preview-icon ic-purple">✍️</div>
+          Prompting that works
+          <span class="preview-free">Free</span>
+        </div>
+        <div class="preview-item">
+          <div class="preview-icon ic-amber">⚡</div>
+          AI automation
+          <span class="preview-free">Free</span>
+        </div>
+        <div class="preview-item">
+          <div class="preview-icon ic-green">🤖</div>
+          Agentic AI & pipelines
+          <span class="preview-free">Free</span>
+        </div>
+        <div class="preview-item">
+          <div class="preview-icon ic-pink">💻</div>
+          Coding with Cursor
+          <span class="preview-free">Free</span>
+        </div>
+      </div>
+      <button class="hero-card-cta" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
+        Unlock all 8 courses free →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">8</span>
+      <div class="stat-label">Free courses</div>
+    </div>
+    <div>
+      <span class="stat-num">40+</span>
+      <div class="stat-label">Practical lessons</div>
+    </div>
+    <div>
+      <span class="stat-num">$0</span>
+      <div class="stat-label">Cost, always</div>
+    </div>
+    <div>
+      <span class="stat-num">0</span>
+      <div class="stat-label">Prerequisites needed</div>
+    </div>
+  </div>
+</div>
+
+<!-- CATALOGUE -->
+<section id="courses" class="catalogue">
+  <div class="section-eyebrow">Course catalogue</div>
+  <h2 class="section-title">Everything you need to<br>understand AI.</h2>
+  <p class="section-sub">From absolute basics to building real automation pipelines and coding with AI agents. Go in order or jump to what matters most.</p>
+
+  <div class="filter-tabs">
+    <button class="tab active" onclick="filter('all', this)">All courses</button>
+    <button class="tab" onclick="filter('foundations', this)">Foundations</button>
+    <button class="tab" onclick="filter('automation', this)">Automation</button>
+    <button class="tab" onclick="filter('advanced', this)">Advanced</button>
+  </div>
+
+  <div class="course-grid" id="courseGrid"></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how">
+  <div class="how-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Simple by design.</h2>
+    <p class="section-sub">No paywalls. No account walls. Sign up, get access to everything, learn at your own pace.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Sign up free</div>
+        <p class="step-desc">Drop your email and get instant access to all 8 courses and 40+ lessons. No credit card, no catch.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Learn at your pace</div>
+        <p class="step-desc">Short, focused lessons you can finish in a lunch break. No deadlines. Go in order or jump around.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Apply it immediately</div>
+        <p class="step-desc">Every lesson ends with something practical you can use the same day — at work, in your business, or on a side project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="signup" class="cta-section">
+  <div class="section-eyebrow">Get started</div>
+  <h2>Ready to actually<br><em>understand AI?</em></h2>
+  <p>Join for free. Eight courses, 40+ lessons, zero cost. No jargon, no fluff — just clear, practical AI education.</p>
+  <div class="signup-form">
+    <input class="email-input" type="email" placeholder="your@email.com" id="emailInput" />
+    <button class="btn btn-primary btn-lg" onclick="handleSignup()">Start learning →</button>
+  </div>
+  <p class="form-note">No spam. Unsubscribe anytime. Free forever.</p>
+  <div class="trust-row">
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      No credit card
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      No prerequisites
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      Free forever
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      Instant access
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">AI <em>for All</em></div>
+    <div class="footer-note">A nonprofit. Free AI education for everyone. © 2025</div>
+  </div>
+</footer>
+
+<script>
+const courses = [
+  {
+    track:'foundations', icon:'🧠', iconClass:'ic-teal',
+    num:'01', badge:'Foundations', badgeClass:'track-foundations',
+    title:'What is AI? The plain-language guide',
+    desc:'What AI actually is, how it learns from data, and why it\'s changing everything right now. The perfect starting point if you\'re completely new.',
+    lessons:5, time:'45 min', level:'Beginner'
+  },
+  {
+    track:'foundations', icon:'💬', iconClass:'ic-blue',
+    num:'02', badge:'Foundations', badgeClass:'track-foundations',
+    title:'LLMs, tokens & how ChatGPT really works',
+    desc:'Demystify large language models. Understand tokens, context windows, temperature settings, and why AI sometimes gets things wrong.',
+    lessons:6, time:'1 hr', level:'Beginner'
+  },
+  {
+    track:'foundations', icon:'✍️', iconClass:'ic-purple',
+    num:'03', badge:'Foundations', badgeClass:'track-foundations',
+    title:'Prompting that actually works',
+    desc:'The difference between a bad prompt and a great one. Learn the prompt engineering techniques used by AI professionals every day.',
+    lessons:7, time:'1 hr', level:'Beginner'
+  },
+  {
+    track:'automation', icon:'⚡', iconClass:'ic-amber',
+    num:'04', badge:'Automation', badgeClass:'track-automation',
+    title:'AI automation explained',
+    desc:'What automation means in plain English, how AI fits into it, and real examples of repetitive tasks you can automate today without writing any code.',
+    lessons:5, time:'50 min', level:'Intermediate'
+  },
+  {
+    track:'automation', icon:'🔗', iconClass:'ic-coral',
+    num:'05', badge:'Automation', badgeClass:'track-automation',
+    title:'No-code platforms: Make, Zapier & n8n',
+    desc:'A hands-on comparison of the top automation platforms. Learn when to use each one and how to connect AI tools into a working workflow.',
+    lessons:6, time:'1.5 hr', level:'Intermediate'
+  },
+  {
+    track:'advanced', icon:'🤖', iconClass:'ic-green',
+    num:'06', badge:'Advanced', badgeClass:'track-advanced',
+    title:'Agentic AI & how pipelines work',
+    desc:'What AI agents are, how multi-step pipelines chain together, and how to design a system where AI completes complex tasks on its own.',
+    lessons:6, time:'1 hr', level:'Intermediate'
+  },
+  {
+    track:'advanced', icon:'💻', iconClass:'ic-pink',
+    num:'07', badge:'Advanced', badgeClass:'track-advanced',
+    title:'Coding with AI: a Cursor beginner\'s guide',
+    desc:'Learn to use Cursor to write real, working code with AI assistance — even if you\'ve never coded before. Build simple tools and automations.',
+    lessons:7, time:'2 hr', level:'Intermediate'
+  },
+  {
+    track:'advanced', icon:'🌍', iconClass:'ic-slate',
+    num:'08', badge:'Advanced', badgeClass:'track-advanced',
+    title:'Using AI in the real world',
+    desc:'How to apply everything you\'ve learned: AI for your job, your business, your research, and building your own side projects from scratch.',
+    lessons:5, time:'50 min', level:'All levels'
+  }
+];
+
+function renderCourses(list) {
+  document.getElementById('courseGrid').innerHTML = list.map(c => `
+    <div class="course-card" data-track="${c.track}">
+      <div class="card-top">
+        <div class="course-icon ${c.iconClass}">${c.icon}</div>
+        <span class="track-badge ${c.badgeClass}">${c.badge}</span>
+      </div>
+      <div class="course-num">Course ${c.num}</div>
+      <div class="course-title">${c.title}</div>
+      <p class="course-desc">${c.desc}</p>
+      <div class="card-footer">
+        <div class="card-meta">
+          <span>📖 ${c.lessons} lessons</span>
+          <span>⏱ ${c.time}</span>
+          <span>${c.level}</span>
+        </div>
+        <span class="free-tag">Free</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filter(track, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderCourses(track === 'all' ? courses : courses.filter(c => c.track === track));
+}
+
+function handleSignup() {
+  const email = document.getElementById('emailInput').value;
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  // Replace this URL with your Tally.so or Google Form
+  alert('Thanks! We\'ll be in touch soon. (Connect this to Tally.so or Google Forms)');
+}
+
+renderCourses(courses);
+</script>
+</body>
+</html>
